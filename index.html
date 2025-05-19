@@ -3,912 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpongeBob High School Adventures</title>
+    <title>Startup Success Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        .spongebob-font {
-            font-family: 'Fredoka One', cursive;
+        .montserrat {
+            font-family: 'Montserrat', sans-serif;
         }
-        .bubble-bg {
-            background-color: #0077be;
-            background-image: linear-gradient(45deg, #0077be 25%, #00a2ff 25%, #00a2ff 50%, #0077be 50%, #0077be 75%, #00a2ff 75%, #00a2ff 100%);
-            background-size: 56.57px 56.57px;
-            position: relative;
-            overflow: hidden;
+        .opensans {
+            font-family: 'Open Sans', sans-serif;
         }
-        .bubble {
-            position: absolute;
-            bottom: -20px;
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            animation: float 8s infinite ease-in;
+        .feature-card {
+            transition: all 0.3s ease;
         }
-        @keyframes float {
-            0% {
-                transform: translateY(0) scale(1);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(-100vh) scale(1.5);
-                opacity: 0;
-            }
+        .feature-card:hover {
+            transform: translateY(-5px);
         }
-        .bounce {
-            animation: bounce 2s infinite;
+        .gradient-text {
+            background: linear-gradient(45deg, #2563eb, #4f46e5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-        .character-card:hover .character-circle {
-            transform: scale(1.2);
-        }
-        .character-circle {
-            transition: transform 0.3s ease;
-        }
-        .jellyfish {
-            position: absolute;
-            top: -50px;
-            animation: jellyfish-float 15s linear infinite;
-            opacity: 0.7;
-        }
-        @keyframes jellyfish-float {
-            0% {
-                transform: translateY(0) translateX(0);
-            }
-            25% {
-                transform: translateY(20vh) translateX(10vw);
-            }
-            50% {
-                transform: translateY(40vh) translateX(-5vw);
-            }
-            75% {
-                transform: translateY(60vh) translateX(15vw);
-            }
-            100% {
-                transform: translateY(110vh) translateX(0);
-                opacity: 0;
-            }
-        }
-        
-        /* Dark mode styles */
-        .dark-mode {
-            --bg-primary: #162447;
-            --bg-secondary: #1f4068;
-            --text-primary: #e6f1ff;
-            --text-secondary: #c3d8f0;
-        }
-        
-        .dark-mode .bg-blue-100 {
-            background-color: var(--bg-primary);
-        }
-        
-        .dark-mode .bg-white {
-            background-color: var(--bg-secondary);
-            color: var(--text-primary);
-        }
-        
-        .dark-mode .text-gray-700 {
-            color: var(--text-secondary);
-        }
-        
-        .dark-mode .bg-yellow-100 {
-            background-color: #2d4a8a;
-        }
-        
-        .dark-mode .bg-green-100 {
-            background-color: #1a472a;
-        }
-        
-        /* Quote box styles */
-        .quote-box {
-            position: relative;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px auto;
-            max-width: 500px;
-            background-color: #fff;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .quote-box::before {
-            content: """;
-            position: absolute;
-            top: -20px;
-            left: 10px;
-            font-size: 80px;
-            color: #FCD34D;
-            font-family: Georgia, serif;
-        }
-        
-        .dark-mode .quote-box {
-            background-color: #1f4068;
-        }
-        
-        /* Quiz styles */
-        .quiz-container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .quiz-option {
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        
-        .quiz-option:hover {
-            background-color: #f0f0f0;
-        }
-        
-        .option-selected {
-            background-color: #dbeafe;
-            border: 2px solid #3b82f6;
-        }
-        
-        .option-correct {
-            background-color: #dcfce7;
-            border: 2px solid #22c55e;
-        }
-        
-        .option-incorrect {
-            background-color: #fee2e2;
-            border: 2px solid #ef4444;
-        }
-        
-        .dark-mode .quiz-container {
-            background-color: #1f4068;
-        }
-        
-        .dark-mode .quiz-option:hover {
-            background-color: #2d4a8a;
-        }
-        
-        .dark-mode .option-selected {
-            background-color: #3b82f6;
-            border: 2px solid #60a5fa;
+        .stats-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
-<body class="bg-blue-100" id="body">
-    <!-- Navbar -->
-    <nav class="bg-yellow-400 p-4 sticky top-0 z-50 shadow-lg">
-        <div class="container mx-auto flex flex-wrap justify-between items-center">
-            <div class="flex items-center">
-                <div class="h-12 w-12 mr-2 bg-yellow-300 rounded-full flex items-center justify-center bounce">
-                    <span class="text-blue-500 font-bold text-xl">SB</span>
+<body class="bg-gray-50">
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <a href="#" class="text-2xl montserrat font-bold gradient-text">StartupHub</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#features" class="opensans text-gray-600 hover:text-gray-900 transition-colors duration-200">Features</a>
+                    <a href="#success" class="opensans text-gray-600 hover:text-gray-900 transition-colors duration-200">Success Stories</a>
+                    <a href="#resources" class="opensans text-gray-600 hover:text-gray-900 transition-colors duration-200">Resources</a>
+                    <a href="#contact" class="opensans text-gray-600 hover:text-gray-900 transition-colors duration-200">Contact</a>
                 </div>
-                <h1 class="text-2xl md:text-3xl font-bold text-blue-600 spongebob-font">SpongeBob High School Life</h1>
-            </div>
-            <div class="flex items-center">
-                <button id="theme-toggle" class="bg-blue-500 hover:bg-blue-600 text-white font-bold p-2 rounded-full mr-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                <button class="md:hidden p-2 rounded-lg hover:bg-gray-100">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
-                <div class="block lg:hidden">
-                    <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-blue-600 border-blue-600 hover:text-blue-800 hover:border-blue-800">
-                        <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
-                    </button>
-                </div>
-            </div>
-            <div id="nav-content" class="hidden lg:flex lg:items-center lg:w-auto w-full">
-                <ul class="lg:flex flex-1 items-center lg:justify-end mt-2 lg:mt-0">
-                    <li class="mr-3"><a href="#home" class="block p-2 text-blue-700 font-bold spongebob-font hover:text-blue-800">Home</a></li>
-                    <li class="mr-3"><a href="#characters" class="block p-2 text-blue-700 font-bold spongebob-font hover:text-blue-800">Characters</a></li>
-                    <li class="mr-3"><a href="#homework" class="block p-2 text-blue-700 font-bold spongebob-font hover:text-blue-800">Homework Help</a></li>
-                    <li class="mr-3"><a href="#work" class="block p-2 text-blue-700 font-bold spongebob-font hover:text-blue-800">Work</a></li>
-                    <li class="mr-3"><a href="#quiz" class="block p-2 text-blue-700 font-bold spongebob-font hover:text-blue-800">Quiz</a></li>
-                    <li><a href="#gallery" class="block p-2 text-blue-700 font-bold spongebob-font hover:text-blue-800">Gallery</a></li>
-                </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="bubble-bg py-20">
-        <div id="bubbles-container"></div>
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col lg:flex-row items-center">
-                <div class="lg:w-1/2 text-center lg:text-left mb-8 lg:mb-0">
-                    <h2 class="text-4xl md:text-5xl text-yellow-400 font-bold mb-4 spongebob-font drop-shadow-lg">Welcome to Bikini Bottom High!</h2>
-                    <p class="text-white text-lg md:text-xl mb-6 bg-blue-600 bg-opacity-70 p-4 rounded-lg">Navigating high school life with SpongeBob and friends. Are you ready, kids? Aye aye, Captain!</p>
-                    <button id="ready-btn" class="bg-yellow-400 hover:bg-yellow-500 text-blue-700 font-bold py-3 px-6 rounded-full shadow-lg transform transition duration-300 hover:scale-105 spongebob-font">
-                        I'm Ready!
-                    </button>
-                </div>
-                <div class="lg:w-1/2">
-                    <!-- Objects removed -->
-                </div>
+    <section class="relative h-[90vh] flex items-center bg-gradient-to-r from-blue-600 to-indigo-700">
+        <div class="absolute inset-0 bg-black opacity-30"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-2xl">
+                <h1 class="text-4xl md:text-6xl montserrat text-white mb-4 leading-tight">Turn Your Vision Into Reality</h1>
+                <p class="text-xl opensans text-gray-200 mb-8 leading-relaxed">Empowering entrepreneurs with the tools and knowledge to build successful businesses</p>
+                <a href="#features" class="inline-block bg-white text-blue-600 px-8 py-3 rounded-lg opensans font-semibold hover:bg-gray-100 transition-colors duration-200 shadow-lg hover:shadow-xl">Explore Features</a>
             </div>
         </div>
     </section>
 
-    <!-- Characters Section -->
-    <section id="characters" class="py-16 bg-white relative">
-        <div class="jellyfish w-16 h-20 left-10 bg-purple-200 rounded-t-full"></div>
-        <div class="jellyfish w-12 h-16 left-[40%] bg-pink-200 rounded-t-full" style="animation-delay: 5s;"></div>
-        <div class="jellyfish w-14 h-18 left-[75%] bg-blue-200 rounded-t-full" style="animation-delay: 8s;"></div>
-        
+    <section id="features" class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-blue-600 spongebob-font">Meet the Students!</h2>
+            <h2 class="text-3xl montserrat text-center mb-12">Six Key Features for Success</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Character Cards -->
-                <div class="character-card bg-yellow-200 rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
-                    <div class="bg-yellow-400 h-56 w-full flex items-center justify-center">
-                        <div class="character-circle bg-yellow-300 h-32 w-32 rounded-full flex items-center justify-center">
-                            <span class="text-4xl font-bold">SB</span>
-                        </div>
+                <div class="feature-card bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                        </svg>
                     </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-blue-700 mb-2 spongebob-font">SpongeBob SquarePants</h3>
-                        <p class="text-gray-700 mb-4">The most enthusiastic student in class! Always ready to learn and help others with homework.</p>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <span class="mr-2 bg-green-200 px-2 py-1 rounded">Class President</span>
-                            <span class="bg-blue-200 px-2 py-1 rounded">Honor Roll</span>
-                        </div>
-                    </div>
+                    <h3 class="text-xl montserrat font-semibold mb-2">Business Plan Builder</h3>
+                    <p class="opensans text-gray-600">Create comprehensive business plans with our step-by-step guide and templates</p>
                 </div>
-                
-                <div class="character-card bg-pink-200 rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
-                    <div class="bg-pink-400 h-56 w-full flex items-center justify-center">
-                        <div class="character-circle bg-pink-300 h-32 w-32 rounded-full flex items-center justify-center">
-                            <span class="text-4xl font-bold">PS</span>
-                        </div>
+
+                <div class="feature-card bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
                     </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-blue-700 mb-2 spongebob-font">Patrick Star</h3>
-                        <p class="text-gray-700 mb-4">SpongeBob's best friend who occasionally shows surprising wisdom despite struggling with academics.</p>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <span class="mr-2 bg-yellow-200 px-2 py-1 rounded">Nap Club</span>
-                            <span class="bg-purple-200 px-2 py-1 rounded">Rock Enthusiast</span>
-                        </div>
-                    </div>
+                    <h3 class="text-xl montserrat font-semibold mb-2">Financial Projections</h3>
+                    <p class="opensans text-gray-600">Generate accurate financial forecasts and track your business metrics</p>
                 </div>
-                
-                <div class="character-card bg-blue-200 rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
-                    <div class="bg-blue-400 h-56 w-full flex items-center justify-center">
-                        <div class="character-circle bg-blue-300 h-32 w-32 rounded-full flex items-center justify-center">
-                            <span class="text-4xl font-bold">ST</span>
-                        </div>
+
+                <div class="feature-card bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
                     </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-blue-700 mb-2 spongebob-font">Squidward Tentacles</h3>
-                        <p class="text-gray-700 mb-4">The artistic and somewhat grumpy clarinet player who dreams of being recognized for his talents.</p>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <span class="mr-2 bg-red-200 px-2 py-1 rounded">Band Member</span>
-                            <span class="bg-green-200 px-2 py-1 rounded">Art Club</span>
-                        </div>
+                    <h3 class="text-xl montserrat font-semibold mb-2">Network Connect</h3>
+                    <p class="opensans text-gray-600">Connect with mentors, investors, and fellow entrepreneurs</p>
+                </div>
+
+                <div class="feature-card bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+                    <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
                     </div>
+                    <h3 class="text-xl montserrat font-semibold mb-2">Market Research</h3>
+                    <p class="opensans text-gray-600">Access industry reports and competitor analysis tools</p>
+                </div>
+
+                <div class="feature-card bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+                    <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl montserrat font-semibold mb-2">Legal Templates</h3>
+                    <p class="opensans text-gray-600">Access customizable legal documents and contracts</p>
+                </div>
+
+                <div class="feature-card bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl montserrat font-semibold mb-2">Growth Accelerator</h3>
+                    <p class="opensans text-gray-600">Strategic tools and resources to scale your business</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Homework Help Section -->
-    <section id="homework" class="py-16 bg-blue-500">
+    <section id="success" class="py-20 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-yellow-400 spongebob-font">Homework Help</h2>
-            
-            <div class="bg-white rounded-lg shadow-lg p-6 lg:p-8 mb-8 transform transition duration-300 hover:shadow-2xl">
-                <h3 class="text-2xl font-bold text-blue-600 mb-4 spongebob-font">SpongeBob's Study Tips</h3>
-                
-                <div class="space-y-4">
-                    <div class="flex items-start">
-                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-yellow-400 flex items-center justify-center text-white font-bold">1</div>
-                        <div class="ml-4">
-                            <h4 class="text-lg font-bold text-blue-600">Be Enthusiastic!</h4>
-                            <p class="text-gray-700">Approach your studies with a positive attitude! Even boring subjects can be fun if you bring enthusiasm.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-start">
-                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-yellow-400 flex items-center justify-center text-white font-bold">2</div>
-                        <div class="ml-4">
-                            <h4 class="text-lg font-bold text-blue-600">Study Groups</h4>
-                            <p class="text-gray-700">Form a study group with friends! Teaching others helps you learn better (just don't invite too many Patricks!).</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-start">
-                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-yellow-400 flex items-center justify-center text-white font-bold">3</div>
-                        <div class="ml-4">
-                            <h4 class="text-lg font-bold text-blue-600">Take Breaks</h4>
-                            <p class="text-gray-700">Remember to take short breaks to jellyfish or blow bubbles. Your brain needs rest to stay focused!</p>
-                        </div>
-                    </div>
+            <h2 class="text-3xl montserrat text-center mb-12">Success Stories</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="stats-card p-6 rounded-lg hover:shadow-lg transition-all duration-300">
+                    <div class="text-4xl font-bold text-blue-600 mb-2">500+</div>
+                    <p class="opensans text-gray-600">Startups Launched</p>
                 </div>
-            </div>
-            
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <div class="p-6 lg:p-8">
-                    <h3 class="text-2xl font-bold text-blue-600 mb-4 spongebob-font">Weekly Study Schedule</h3>
-                    
-                    <div class="overflow-x-auto">
-                        <table class="w-full">
-                            <thead>
-                                <tr class="bg-blue-100">
-                                    <th class="px-4 py-2 text-left">Day</th>
-                                    <th class="px-4 py-2 text-left">Subject</th>
-                                    <th class="px-4 py-2 text-left">Study Partner</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="border px-4 py-2">Monday</td>
-                                    <td class="border px-4 py-2">Marine Biology</td>
-                                    <td class="border px-4 py-2">Sandy</td>
-                                </tr>
-                                <tr class="bg-gray-50">
-                                    <td class="border px-4 py-2">Tuesday</td>
-                                    <td class="border px-4 py-2">Bubble Blowing</td>
-                                    <td class="border px-4 py-2">Patrick</td>
-                                </tr>
-                                <tr>
-                                    <td class="border px-4 py-2">Wednesday</td>
-                                    <td class="border px-4 py-2">Cooking</td>
-                                    <td class="border px-4 py-2">Mr. Krabs</td>
-                                </tr>
-                                <tr class="bg-gray-50">
-                                    <td class="border px-4 py-2">Thursday</td>
-                                    <td class="border px-4 py-2">Music</td>
-                                    <td class="border px-4 py-2">Squidward</td>
-                                </tr>
-                                <tr>
-                                    <td class="border px-4 py-2">Friday</td>
-                                    <td class="border px-4 py-2">Karate</td>
-                                    <td class="border px-4 py-2">Sandy</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="stats-card p-6 rounded-lg hover:shadow-lg transition-all duration-300">
+                    <div class="text-4xl font-bold text-green-600 mb-2">$230M+</div>
+                    <p class="opensans text-gray-600">Funding Raised</p>
+                </div>
+                <div class="stats-card p-6 rounded-lg hover:shadow-lg transition-all duration-300">
+                    <div class="text-4xl font-bold text-purple-600 mb-2">93%</div>
+                    <p class="opensans text-gray-600">Success Rate</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Work Experience Section -->
-    <section id="work" class="py-16 bg-green-100">
+    <section id="contact" class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-blue-600 spongebob-font">Work Experience</h2>
-            <p class="text-center text-lg mb-10 max-w-3xl mx-auto">High school is the perfect time to gain valuable work experience! Check out these awesome part-time jobs in Bikini Bottom.</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
-                    <div class="bg-red-200 h-64 w-full flex items-center justify-center">
-                        <div class="text-center">
-                            <div class="bg-red-400 h-20 w-20 rounded-full mx-auto mb-2"></div>
-                            <span class="font-bold text-xl">Krusty Krab</span>
-                        </div>
+            <h2 class="text-3xl montserrat text-center mb-12">Start Your Journey</h2>
+            <div class="max-w-md mx-auto">
+                <form class="space-y-6">
+                    <div>
+                        <label class="block opensans text-gray-700 mb-2">Name</label>
+                        <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200">
                     </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-blue-600 mb-2 spongebob-font">Fast Food</h3>
-                        <p class="text-gray-700 mb-4">Learn customer service and food preparation skills at the Krusty Krab! Make the best Krabby Patties in the sea.</p>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <span class="mr-2 bg-yellow-200 px-2 py-1 rounded">$9.25/hour</span>
-                            <span class="bg-blue-200 px-2 py-1 rounded">Flexible Hours</span>
-                        </div>
+                    <div>
+                        <label class="block opensans text-gray-700 mb-2">Email</label>
+                        <input type="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200">
                     </div>
-                </div>
-
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
-                    <div class="bg-indigo-200 h-64 w-full flex items-center justify-center">
-                        <div class="text-center">
-                            <div class="bg-indigo-400 h-20 w-20 rounded-square mx-auto mb-2 flex items-center justify-center">
-                                <span class="text-white text-2xl">📚</span>
-                            </div>
-                            <span class="font-bold text-xl">Library</span>
-                        </div>
+                    <div>
+                        <label class="block opensans text-gray-700 mb-2">Business Idea</label>
+                        <textarea class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200" rows="4"></textarea>
                     </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-blue-600 mb-2 spongebob-font">Library Assistant</h3>
-                        <p class="text-gray-700 mb-4">Help organize books and assist visitors at the Bikini Bottom Library. Perfect for quiet, studious types!</p>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <span class="mr-2 bg-yellow-200 px-2 py-1 rounded">$8.50/hour</span>
-                            <span class="bg-purple-200 px-2 py-1 rounded">After School</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
-                    <div class="bg-yellow-200 h-64 w-full flex items-center justify-center">
-                        <div class="text-center">
-                            <div class="bg-yellow-400 h-20 w-20 rounded-square mx-auto mb-2 flex items-center justify-center">
-                                <span class="text-white text-2xl">🏊</span>
-                            </div>
-                            <span class="font-bold text-xl">Goo Lagoon</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-blue-600 mb-2 spongebob-font">Lifeguard</h3>
-                        <p class="text-gray-700 mb-4">Watch over swimmers at Goo Lagoon Beach. Training provided! Must be a strong swimmer and responsible.</p>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <span class="mr-2 bg-yellow-200 px-2 py-1 rounded">$11.00/hour</span>
-                            <span class="bg-red-200 px-2 py-1 rounded">Weekends</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-12 text-center">
-                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105 spongebob-font">
-                    View More Jobs
-                </button>
+                    <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-lg hover:shadow-xl">Get Started</button>
+                </form>
             </div>
         </div>
     </section>
 
-    <!-- SpongeBob Quote Section -->
-    <section class="py-12 bg-white">
+    <footer class="bg-gray-900 text-white py-12">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-8 text-blue-600 spongebob-font">SpongeBob Wisdom</h2>
-            
-            <div class="quote-box" id="quote-box">
-                <p class="text-xl italic text-gray-700 mb-4" id="quote-text">"The inner machinations of my mind are an enigma."</p>
-                <p class="text-right font-bold text-blue-600" id="quote-author">- Patrick Star</p>
-            </div>
-            
-            <div class="text-center mt-6">
-                <button id="new-quote" class="bg-yellow-400 hover:bg-yellow-500 text-blue-700 font-bold py-2 px-4 rounded-full shadow">
-                    New Quote
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Quiz Section - New Feature -->
-    <section id="quiz" class="py-16 bg-blue-200">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-blue-600 spongebob-font">Bikini Bottom Trivia</h2>
-            
-            <div class="quiz-container" id="quiz-container">
-                <h3 class="text-xl font-bold text-blue-600 mb-6 spongebob-font" id="quiz-question">Where does SpongeBob work?</h3>
-                
-                <div class="quiz-options" id="quiz-options">
-                    <div class="quiz-option" data-correct="true">
-                        <p>The Krusty Krab</p>
-                    </div>
-                    <div class="quiz-option">
-                        <p>The Chum Bucket</p>
-                    </div>
-                    <div class="quiz-option">
-                        <p>Weenie Hut Jr's</p>
-                    </div>
-                    <div class="quiz-option">
-                        <p>Goofy Goober's Ice Cream Party Boat</p>
-                    </div>
-                </div>
-                
-                <div class="mt-6 text-center">
-                    <p class="text-gray-700 mb-4" id="quiz-result"></p>
-                    <button id="next-question" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full shadow hidden">
-                        Next Question
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Add a SpongeBob Quote Section before the Gallery -->
-    <section class="py-12 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-8 text-blue-600 spongebob-font">SpongeBob Wisdom</h2>
-            
-            <div class="quote-box" id="quote-box">
-                <p class="text-xl italic text-gray-700 mb-4" id="quote-text">"The inner machinations of my mind are an enigma."</p>
-                <p class="text-right font-bold text-blue-600" id="quote-author">- Patrick Star</p>
-            </div>
-            
-            <div class="text-center mt-6">
-                <button id="new-quote" class="bg-yellow-400 hover:bg-yellow-500 text-blue-700 font-bold py-2 px-4 rounded-full shadow">
-                    New Quote
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section id="gallery" class="py-16 bg-yellow-100">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-blue-600 spongebob-font">Photo Gallery</h2>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="overflow-hidden rounded-lg shadow-lg bg-blue-200 h-64 transform transition duration-500 hover:scale-110">
-                    <div class="w-full h-full flex items-center justify-center">
-                        <div class="text-center">
-                            <div class="bg-blue-400 h-12 w-12 rounded-full mx-auto mb-2"></div>
-                            <span class="font-bold">School Field Trip</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="overflow-hidden rounded-lg shadow-lg bg-green-200 h-64 transform transition duration-500 hover:scale-110">
-                    <div class="w-full h-full flex items-center justify-center">
-                        <div class="text-center">
-                            <div class="bg-green-400 h-12 w-12 rounded-full mx-auto mb-2"></div>
-                            <span class="font-bold">Science Fair</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="overflow-hidden rounded-lg shadow-lg bg-purple-200 h-64 transform transition duration-500 hover:scale-110">
-                    <div class="w-full h-full flex items-center justify-center">
-                        <div class="text-center">
-                            <div class="bg-purple-400 h-12 w-12 rounded-full mx-auto mb-2"></div>
-                            <span class="font-bold">Prom Night</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="overflow-hidden rounded-lg shadow-lg bg-red-200 h-64 transform transition duration-500 hover:scale-110">
-                    <div class="w-full h-full flex items-center justify-center">
-                        <div class="text-center">
-                            <div class="bg-red-400 h-12 w-12 rounded-full mx-auto mb-2"></div>
-                            <span class="font-bold">Boating School</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="overflow-hidden rounded-lg shadow-lg bg-indigo-200 h-64 transform transition duration-500 hover:scale-110">
-                    <div class="w-full h-full flex items-center justify-center">
-                        <div class="text-center">
-                            <div class="bg-indigo-400 h-12 w-12 rounded-full mx-auto mb-2"></div>
-                            <span class="font-bold">Talent Show</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="overflow-hidden rounded-lg shadow-lg bg-yellow-200 h-64 transform transition duration-500 hover:scale-110">
-                    <div class="w-full h-full flex items-center justify-center">
-                        <div class="text-center">
-                            <div class="bg-yellow-400 h-12 w-12 rounded-full mx-auto mb-2"></div>
-                            <span class="font-bold">Graduation Day</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-blue-600 text-white py-10">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between">
+            <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-6 md:mb-0">
-                    <h3 class="text-xl font-bold mb-2 spongebob-font">SpongeBob High School Life</h3>
-                    <p class="text-blue-100">Making high school as fun as living in a pineapple under the sea!</p>
+                    <h3 class="text-2xl montserrat font-bold">StartupHub</h3>
+                    <p class="opensans text-gray-400 mt-2">Empowering Entrepreneurs</p>
                 </div>
-                
-                <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-6">
-                    <div>
-                        <h4 class="text-sm font-semibold uppercase tracking-wider mb-2">Quick Links</h4>
-                        <ul class="space-y-2">
-                            <li><a href="#home" class="text-blue-200 hover:text-white">Home</a></li>
-                            <li><a href="#characters" class="text-blue-200 hover:text-white">Characters</a></li>
-                            <li><a href="#homework" class="text-blue-200 hover:text-white">Homework Help</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div>
-                        <h4 class="text-sm font-semibold uppercase tracking-wider mb-2">School Clubs</h4>
-                        <ul class="space-y-2">
-                            <li><a href="#" class="text-blue-200 hover:text-white">Jellyfishing Club</a></li>
-                            <li><a href="#" class="text-blue-200 hover:text-white">Bubble Blowing Club</a></li>
-                            <li><a href="#" class="text-blue-200 hover:text-white">Krusty Krab Culinary</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div>
-                        <h4 class="text-sm font-semibold uppercase tracking-wider mb-2">Connect</h4>
-                        <ul class="space-y-2">
-                            <li><a href="#" class="text-blue-200 hover:text-white">Barnacle Book</a></li>
-                            <li><a href="#" class="text-blue-200 hover:text-white">InstaClam</a></li>
-                            <li><a href="#" class="text-blue-200 hover:text-white">SnapShell</a></li>
-                        </ul>
-                    </div>
+                <div class="flex space-x-6">
+                    <a href="https://github.com/geno543" class="text-gray-400 hover:text-white transition-colors duration-200">
+                        <span class="sr-only">GitHub</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/mohamed-ramadan-551a17272/" class="text-gray-400 hover:text-white transition-colors duration-200">
+                        <span class="sr-only">LinkedIn</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
-            
-            <hr class="my-6 border-blue-500">
-            
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-                <p class="text-sm text-blue-200">© 2023 SpongeBob High School Life. All rights reserved.</p>
-                <div class="flex mt-4 md:mt-0 space-x-4">
-                    <a href="#" class="text-blue-200 hover:text-white">
-                        <span class="sr-only">Facebook</span>
-                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"></path>
-                        </svg>
-                    </a>
-                    <a href="#" class="text-blue-200 hover:text-white">
-                        <span class="sr-only">Instagram</span>
-                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"></path>
-                        </svg>
-                    </a>
-                    <a href="#" class="text-blue-200 hover:text-white">
-                        <span class="sr-only">Twitter</span>
-                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
-                        </svg>
-                    </a>
-                </div>
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center">
+                <p class="opensans text-gray-400">&copy; 2025 Geno. All rights reserved.</p>
             </div>
         </div>
     </footer>
-
-    <!-- JavaScript for mobile menu toggle and animations -->
-    <script>
-        // Mobile menu toggle
-        document.getElementById('nav-toggle').onclick = function() {
-            document.getElementById('nav-content').classList.toggle('hidden');
-        };
-
-        // Create bubbles
-        function createBubbles() {
-            const container = document.getElementById('bubbles-container');
-            if (!container) return;
-            
-            const containerWidth = container.parentElement.offsetWidth;
-            
-            for (let i = 0; i < 20; i++) {
-                const bubble = document.createElement('div');
-                bubble.classList.add('bubble');
-                
-                // Random size between 10px and 40px
-                const size = Math.random() * 30 + 10;
-                bubble.style.width = `${size}px`;
-                bubble.style.height = `${size}px`;
-                
-                // Random horizontal position
-                bubble.style.left = `${Math.random() * containerWidth}px`;
-                
-                // Random animation duration and delay
-                const duration = Math.random() * 8 + 4; // 4-12 seconds
-                const delay = Math.random() * 10;
-                bubble.style.animationDuration = `${duration}s`;
-                bubble.style.animationDelay = `${delay}s`;
-                
-                container.appendChild(bubble);
-            }
-        }
-
-        // I'm Ready button effect
-        function setupReadyButton() {
-            const readyBtn = document.getElementById('ready-btn');
-            if (readyBtn) {
-                readyBtn.addEventListener('click', function() {
-                    this.textContent = "Aye aye, Captain!";
-                    this.classList.add('bg-blue-500', 'text-white');
-                    setTimeout(() => {
-                        this.textContent = "I'm Ready!";
-                        this.classList.remove('bg-blue-500', 'text-white');
-                    }, 2000);
-                });
-            }
-        }
-
-        // SpongeBob quotes
-        const quotes = [
-            { text: "The inner machinations of my mind are an enigma.", author: "Patrick Star" },
-            { text: "I'm ready, I'm ready, I'm ready!", author: "SpongeBob SquarePants" },
-            { text: "The best time to wear a striped sweater is all the time.", author: "SpongeBob SquarePants" },
-            { text: "Knowledge cannot replace friendship.", author: "Patrick Star" },
-            { text: "Home is where you're surrounded by other critters that care about you.", author: "Sandy Cheeks" },
-            { text: "I'll have you know that I stubbed my toe last week and only cried for 20 minutes.", author: "SpongeBob SquarePants" },
-            { text: "It's not just a boulder. It's a rock!", author: "SpongeBob SquarePants" },
-            { text: "Is mayonnaise an instrument?", author: "Patrick Star" },
-            { text: "If we're underwater, how can there be a fire?", author: "Patrick Star" },
-            { text: "F is for friends who do stuff together!", author: "SpongeBob SquarePants" }
-        ];
-
-        // Display random quote
-        function displayRandomQuote() {
-            const quoteBox = document.getElementById('quote-box');
-            if (!quoteBox) return;
-            
-            const quoteText = document.getElementById('quote-text');
-            if (!quoteText) return;
-            
-            const quoteAuthor = document.getElementById('quote-author');
-            if (!quoteAuthor) return;
-            
-            const randomIndex = Math.floor(Math.random() * quotes.length);
-            
-            quoteBox.style.opacity = '0';
-            
-            setTimeout(() => {
-                quoteText.textContent = `"${quotes[randomIndex].text}"`;
-                quoteAuthor.textContent = `- ${quotes[randomIndex].author}`;
-                quoteBox.style.opacity = '1';
-            }, 300);
-        }
-
-        // Set up quote system
-        function setupQuotes() {
-            const newQuoteBtn = document.getElementById('new-quote');
-            if (newQuoteBtn) {
-                newQuoteBtn.addEventListener('click', displayRandomQuote);
-                
-                // Add transition effect to quote box
-                const quoteBox = document.getElementById('quote-box');
-                if (quoteBox) {
-                    quoteBox.style.transition = 'opacity 0.3s ease';
-                }
-            }
-        }
-
-        // Theme toggle
-        function toggleTheme() {
-            document.getElementById('body').classList.toggle('dark-mode');
-        }
-
-        // Set up theme toggle
-        function setupThemeToggle() {
-            const themeToggleBtn = document.getElementById('theme-toggle');
-            if (themeToggleBtn) {
-                themeToggleBtn.addEventListener('click', toggleTheme);
-            }
-        }
-
-        // Quiz functionality
-        const quizQuestions = [
-            {
-                question: "Where does SpongeBob work?",
-                options: ["The Krusty Krab", "The Chum Bucket", "Weenie Hut Jr's", "Goofy Goober's Ice Cream Party Boat"],
-                correct: 0
-            },
-            {
-                question: "What is Patrick's last name?",
-                options: ["Square", "Star", "Stone", "Smith"],
-                correct: 1
-            },
-            {
-                question: "What instrument does Squidward play?",
-                options: ["Drums", "Guitar", "Piano", "Clarinet"],
-                correct: 3
-            },
-            {
-                question: "What type of animal is Sandy?",
-                options: ["Beaver", "Rabbit", "Squirrel", "Chipmunk"],
-                correct: 2
-            },
-            {
-                question: "What is SpongeBob's pet snail named?",
-                options: ["Larry", "Jerry", "Gary", "Barry"],
-                correct: 2
-            }
-        ];
-
-        let currentQuestion = 0;
-        let quizScore = 0;
-        let questionAnswered = false;
-
-        function loadQuestion() {
-            const quizContainer = document.getElementById('quiz-container');
-            if (!quizContainer) return;
-            
-            const questionEl = document.getElementById('quiz-question');
-            if (!questionEl) return;
-            
-            const optionsEl = document.getElementById('quiz-options');
-            if (!optionsEl) return;
-            
-            const resultEl = document.getElementById('quiz-result');
-            if (!resultEl) return;
-            
-            const nextBtn = document.getElementById('next-question');
-            if (!nextBtn) return;
-            
-            // Reset state
-            resultEl.textContent = '';
-            nextBtn.classList.add('hidden');
-            questionAnswered = false;
-            
-            // Load current question
-            const q = quizQuestions[currentQuestion];
-            questionEl.textContent = q.question;
-            
-            // Clear previous options
-            optionsEl.innerHTML = '';
-            
-            // Add new options
-            q.options.forEach((option, index) => {
-                const optionEl = document.createElement('div');
-                optionEl.classList.add('quiz-option');
-                if (index === q.correct) {
-                    optionEl.setAttribute('data-correct', 'true');
-                }
-                
-                optionEl.innerHTML = `<p>${option}</p>`;
-                
-                optionEl.addEventListener('click', function() {
-                    if (questionAnswered) return;
-                    
-                    // Mark question as answered
-                    questionAnswered = true;
-                    
-                    // Add selected class
-                    this.classList.add('option-selected');
-                    
-                    // Check if correct
-                    if (this.hasAttribute('data-correct')) {
-                        this.classList.add('option-correct');
-                        resultEl.textContent = 'Correct! You deserve a Krabby Patty!';
-                        resultEl.className = 'text-green-600 font-bold mb-4';
-                        quizScore++;
-                    } else {
-                        this.classList.add('option-incorrect');
-                        
-                        // Find and highlight correct answer
-                        const correctOption = document.querySelector('[data-correct="true"]');
-                        if (correctOption) {
-                            correctOption.classList.add('option-correct');
-                        }
-                        
-                        resultEl.textContent = 'Wrong! Barnacles!';
-                        resultEl.className = 'text-red-600 font-bold mb-4';
-                    }
-                    
-                    // Show next button if not last question
-                    if (currentQuestion < quizQuestions.length - 1) {
-                        nextBtn.classList.remove('hidden');
-                    } else {
-                        // Show final score
-                        setTimeout(() => {
-                            resultEl.textContent = `Quiz complete! You got ${quizScore} out of ${quizQuestions.length} correct!`;
-                            resultEl.className = 'text-blue-600 font-bold mb-4';
-                            
-                            // Reset button
-                            nextBtn.textContent = 'Try Again';
-                            nextBtn.classList.remove('hidden');
-                        }, 1000);
-                    }
-                });
-                
-                optionsEl.appendChild(optionEl);
-            });
-        }
-
-        // Set up quiz
-        function setupQuiz() {
-            loadQuestion();
-            
-            const nextQuestionBtn = document.getElementById('next-question');
-            if (nextQuestionBtn) {
-                nextQuestionBtn.addEventListener('click', function() {
-                    if (currentQuestion < quizQuestions.length - 1) {
-                        currentQuestion++;
-                        loadQuestion();
-                    } else {
-                        // Reset quiz
-                        currentQuestion = 0;
-                        quizScore = 0;
-                        loadQuestion();
-                        this.textContent = 'Next Question';
-                    }
-                });
-            }
-        }
-
-        // Initialize all features when document is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize all components
-            createBubbles();
-            setupReadyButton();
-            setupQuotes();
-            setupThemeToggle();
-            setupQuiz();
-        });
-    </script>
 </body>
 </html> 
